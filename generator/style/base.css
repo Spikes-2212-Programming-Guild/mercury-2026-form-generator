@@ -1,0 +1,124 @@
+:root {
+    /* Colors */
+    --color-primary: #0056b3;
+    --color-bg: #282c34;
+    --color-bg-secondary: #1b1e23;
+    --color-bg-third: #4b5c6c;
+    --color-text: white;
+
+    /* Spacing & Radius */
+    --space-small: 0.5em;
+    --space-large: 1em;
+
+    /* Font Sizes */
+    --font-size-small: 1em;
+    --font-size-large: 1.5em;
+
+    /* Borders */
+    --border-width-small: 0.1em;
+    --border-width-large: 0.25em;
+    --radius: 0.6em;
+}
+
+* {
+    color: var(--color-text);
+    font-weight: normal;
+    background: none;
+    border: none;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+#left-container, #right-container {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-large);
+    gap: var(--space-large);
+}
+
+#left-container {
+    width: 30%;
+}
+
+#right-container {
+    width: 70%;
+}
+
+#id-input {
+    font-size: var(--font-size-large);
+
+    background-color: var(--color-bg-secondary);
+    border: var(--color-bg-third) var(--border-width-small) solid;
+    border-radius: var(--radius);
+
+    margin: var(--space-large);
+    padding: var(--space-small);
+    box-shadow: 0 0.3em 0.5em rgba(0, 0, 0, 0.2);
+}
+
+#load-button, #upload-button {
+    font-size: var(--font-size-small);
+    color: var(--color-text);
+
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: var(--radius);
+
+    margin: var(--space-large);
+    padding: var(--space-small);
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#load-button:hover, #upload-button:hover {
+    background-color: var(--color-primary);
+    transform: scale(1.03);
+}
+
+#loadingOverlay {
+    position: fixed;
+    display: flex;
+    inset: 0; /* expand to the entire screen */
+
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 2rem;
+
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#form-textarea {
+    background-color: var(--color-bg-secondary);
+    border: var(--color-bg-third) var(--border-width-large) solid;
+    border-radius: var(--radius);
+
+    font-size: var(--font-size-small);
+
+    width: min(80%, 70vw);
+    height: min(90%, 80vh);
+
+    resize: none;
+    align-self: center;
+    box-shadow: 0 0.3em 0.5em rgba(0, 0, 0, 0.2);
+}
+
+/* Remove focus outline */
+:focus {
+    outline: none;
+}

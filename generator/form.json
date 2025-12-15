@@ -1,0 +1,369 @@
+{
+    "pages": [
+        {
+            "title": "Pre",
+            "theme": "blue",
+            "questions": [
+                {
+                    "id": "match",
+                    "title": "Match Number",
+                    "type": "ScoreBox",
+                    "defaultValue": ""
+                },
+                {
+                    "id": "alliance",
+                    "title": "Alliance",
+                    "choices": [
+                        "Red",
+                        "Blue"
+                    ],
+                    "type": "List"
+                },
+                {
+                    "id": "team-number",
+                    "title": "Team Number",
+                    "choices": [
+                        1690,
+                        3339,
+                        5951,
+                        2231,
+                        1574,
+                        1577,
+                        5614,
+                        3075,
+                        5990,
+                        5715,
+                        6740,
+                        1937,
+                        5987,
+                        1657,
+                        4590,
+                        5654,
+                        7039,
+                        2630,
+                        9739,
+                        2096,
+                        3065,
+                        1942,
+                        6104,
+                        7845,
+                        3316,
+                        5554,
+                        6738,
+                        4320,
+                        9738,
+                        7067,
+                        5928,
+                        3835,
+                        4338,
+                        3211,
+                        5635,
+                        1576,
+                        9740,
+                        6168,
+                        4416,
+                        3083,
+                        10139,
+                        10695,
+                        2679,
+                        7112,
+                        8223,
+                        5135,
+                        7177,
+                        4744,
+                        5291,
+                        4586,
+                        2230,
+                        6230,
+                        2212,
+                        3388,
+                        9304,
+                        8175,
+                        1580,
+                        9303,
+                        1943,
+                        6741,
+                        4319,
+                        1954,
+                        4661,
+                        11070
+                    ],
+                    "type": "AutoCompleteRadio"
+                },
+                {
+                    "id": "scouter-name",
+                    "title": "Scouter name",
+                    "type": "TextBox"
+                },
+                {
+                    "id": "game-type",
+                    "title": "Game Type",
+                    "choices": [
+                        "Practice",
+                        "Qualifications"
+                    ],
+                    "type": "List"
+                }
+            ]
+        },
+        {
+            "title": "Auto",
+            "theme": "red",
+            "questions": [
+                {
+                    "id": "left-starting-line",
+                    "title": "Left Starting Line",
+                    "type": "Radio",
+                    "choices": [
+                        "No",
+                        "Yes"
+                    ]
+                },
+                {
+                    "type": "container",
+                    "align": "vertical",
+                    "title": "Off Field",
+                    "questions": [
+                        {
+                            "type": "container",
+                            "align": "horizontal",
+                            "title": "basketball",
+                            "questions": [
+                                {
+                                    "id": "auto-off-field-basketball-high",
+                                    "title": "High",
+                                    "type": "ScoreBox"
+                                },
+                                {
+                                    "id": "auto-off-field-basketball-low",
+                                    "title": "Low",
+                                    "type": "ScoreBox"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "container",
+                            "align": "horizontal",
+                            "title": "tennis",
+                            "questions": [
+                                {
+                                    "id": "auto-off-field-tennis-high",
+                                    "title": "High",
+                                    "type": "ScoreBox"
+                                },
+                                {
+                                    "id": "auto-off-field-tennis-low",
+                                    "title": "Low",
+                                    "type": "ScoreBox"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "container",
+                    "align": "vertical",
+                    "title": "On Field",
+                    "questions": [
+                        {
+                            "type": "container",
+                            "align": "horizontal",
+                            "title": "basketball",
+                            "questions": [
+                                {
+                                    "id": "auto-on-field-basketball-high",
+                                    "title": "High",
+                                    "type": "ScoreBox"
+                                },
+                                {
+                                    "id": "auto-on-field-basketball-low",
+                                    "title": "Low",
+                                    "type": "ScoreBox"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "container",
+                            "align": "horizontal",
+                            "title": "tennis",
+                            "questions": [
+                                {
+                                    "id": "auto-on-field-tennis-high",
+                                    "title": "High",
+                                    "type": "ScoreBox"
+                                },
+                                {
+                                    "id": "auto-on-field-tennis-low",
+                                    "title": "Low",
+                                    "type": "ScoreBox"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Teleop",
+            "theme": "green",
+            "questions": [
+                {
+                    "type": "container",
+                    "align": "vertical",
+                    "title": "Off Field",
+                    "questions": [
+                        {
+                            "type": "container",
+                            "align": "horizontal",
+                            "title": "basketball",
+                            "questions": [
+                                {
+                                    "id": "teleop-off-field-basketball-high",
+                                    "title": "High",
+                                    "type": "ScoreBox"
+                                },
+                                {
+                                    "id": "teleop-off-field-basketball-low",
+                                    "title": "Low",
+                                    "type": "ScoreBox"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "container",
+                            "align": "horizontal",
+                            "title": "tennis",
+                            "questions": [
+                                {
+                                    "id": "teleop-off-field-tennis-high",
+                                    "title": "High",
+                                    "type": "ScoreBox"
+                                },
+                                {
+                                    "id": "teleop-off-field-tennis-low",
+                                    "title": "Low",
+                                    "type": "ScoreBox"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "container",
+                    "align": "vertical",
+                    "title": "On Field",
+                    "questions": [
+                        {
+                            "type": "container",
+                            "align": "horizontal",
+                            "title": "basketball",
+                            "questions": [
+                                {
+                                    "id": "teleop-on-field-basketball-high",
+                                    "title": "High",
+                                    "type": "ScoreBox"
+                                },
+                                {
+                                    "id": "teleop-on-field-basketball-low",
+                                    "title": "Low",
+                                    "type": "ScoreBox"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "container",
+                            "align": "horizontal",
+                            "title": "tennis",
+                            "questions": [
+                                {
+                                    "id": "teleop-on-field-tennis-high",
+                                    "title": "High",
+                                    "type": "ScoreBox"
+                                },
+                                {
+                                    "id": "teleop-on-field-tennis-low",
+                                    "title": "Low",
+                                    "type": "ScoreBox"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "End",
+            "theme": "orange",
+            "questions": [
+                {
+                    "id": "field-empty",
+                    "title": "Is Field Empty",
+                    "type": "Radio",
+                    "choices": [
+                        "No",
+                        "Yes"
+                    ]
+                },
+                {
+                    "id": "robot-on-field",
+                    "title": "Robot On Field",
+                    "type": "List",
+                    "choices": [
+                        "Fully On field",
+                        "Half On field",
+                        "Not On field"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Post",
+            "theme": "purple",
+            "questions": [
+                {
+                    "id": "robot-abilities",
+                    "title": "What Can The Robot Do",
+                    "type": "List",
+                    "choices": [
+                        "None",
+                        "Basketball high",
+                        "Basketball low",
+                        "Tennis high",
+                        "Tennis low",
+                        "Collect Tennis ground",
+                        "Collect Tennis feeder",
+                        "Collect Basketball ground",
+                        "Collect Basketball feeder"
+                    ],
+                    "multiple": true
+                },
+                {
+                    "id": "robot-misses",
+                    "title": "Robot Misses",
+                    "choices": [
+                        "Scored Everything",
+                        "Mostly Scored",
+                        "Mostly Missed",
+                        "Missed Everything"
+                    ],
+                    "type": "List"
+                },
+                {
+                    "id": "robot-status",
+                    "title": "Robot Status",
+                    "choices": [
+                        "Fully Functional",
+                        "Has Issues",
+                        "Non-Functional"
+                    ],
+                    "type": "List"
+                },
+                {
+                    "id": "notes",
+                    "title": "Notes",
+                    "type": "CommentBox"
+                }
+            ]
+        }
+    ]
+}
