@@ -2,13 +2,22 @@
     "pages": [
         {
             "title": "Pre",
-            "theme": "blue",
+            "color_theme": "blue",
             "questions": [
                 {
                     "id": "match",
                     "title": "Match Number",
                     "type": "ScoreBox",
                     "defaultValue": ""
+                },
+                {
+                    "id": "game-type",
+                    "title": "Game Type",
+                    "choices": [
+                        "Practice",
+                        "Qualifications"
+                    ],
+                    "type": "List"
                 },
                 {
                     "id": "alliance",
@@ -94,21 +103,12 @@
                     "id": "scouter-name",
                     "title": "Scouter name",
                     "type": "TextBox"
-                },
-                {
-                    "id": "game-type",
-                    "title": "Game Type",
-                    "choices": [
-                        "Practice",
-                        "Qualifications"
-                    ],
-                    "type": "List"
                 }
             ]
         },
         {
             "title": "Auto",
-            "theme": "red",
+            "color_theme": "red",
             "questions": [
                 {
                     "id": "left-starting-line",
@@ -205,7 +205,7 @@
         },
         {
             "title": "Teleop",
-            "theme": "green",
+            "color_theme": "purple",
             "questions": [
                 {
                     "type": "container",
@@ -293,39 +293,39 @@
         },
         {
             "title": "End",
-            "theme": "orange",
+            "color_theme": "green",
             "questions": [
-                {
-                    "id": "field-empty",
-                    "title": "Is Field Empty",
-                    "type": "Radio",
-                    "choices": [
-                        "No",
-                        "Yes"
-                    ]
-                },
-                {
-                    "id": "robot-on-field",
-                    "title": "Robot On Field",
-                    "type": "List",
-                    "choices": [
-                        "Fully On field",
-                        "Half On field",
-                        "Not On field"
-                    ]
-                }
+              {
+                "id": "field-empty",
+                "title": "Is Field Empty",
+                "type": "Radio",
+                "choices": [
+                  "No",
+                  "Yes"
+                ]
+              },
+              {
+                "id": "robot-on-field",
+                "title": "Robot On Field",
+                "type": "List",
+                "choices": [
+                    "Fully On field",
+                    "Half On field",
+                    "Not On field"
+                ]
+              }
             ]
         },
         {
             "title": "Post",
-            "theme": "purple",
+            "color_theme": "cyan",
             "questions": [
                 {
                     "id": "robot-abilities",
                     "title": "What Can The Robot Do",
                     "type": "List",
                     "choices": [
-                        "None",
+                        "Nothing",
                         "Basketball high",
                         "Basketball low",
                         "Tennis high",

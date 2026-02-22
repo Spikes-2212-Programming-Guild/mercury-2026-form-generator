@@ -1,75 +1,138 @@
-import {getFromLocalStorage, setToLocalStorage} from "./utils.js";
+import {getFromLocalStorage, removeFromLocalStorage, setToLocalStorage} from "./utils.js";
 import {SERVER_URL} from "./constants.js";
 
+const LOCAL_STORAGE = {
+    FORM_ID: 'formId',
+    FORM_DRAFT: 'formDraft',
+    FORM_SAVED: 'formSaved',
+    FORM_VERSION: 'formVersion'
+};
+
+/*
+    TODO:
+     add a password, so not anyone can edit the form
+     add the cool question editor
+
+ */
 class App {
 
     initialize() {
-        let formTextarea = document.getElementById('form-textarea');
-        formTextarea.value = getFromLocalStorage('json_data');
-        formTextarea.onchange = () => {
-            setToLocalStorage("json_data", formTextarea.value)
+        // FOR TESTING
+        // removeFromLocalStorage(LOCAL_STORAGE.FORM_VERSION)
+        // removeFromLocalStorage(LOCAL_STORAGE.FORM_SAVED)
+        // removeFromLocalStorage(LOCAL_STORAGE.FORM_DRAFT)
+
+        this.loadingOverlay = document.getElementById('loadingOverlay');
+
+        this.formTextarea = document.getElementById('form-textarea');
+        this.formTextarea.value = getFromLocalStorage(LOCAL_STORAGE.FORM_DRAFT);
+        this.formTextarea.oninput = () => {
+            setToLocalStorage(LOCAL_STORAGE.FORM_DRAFT, this.formTextarea.value)
         }
 
-        let idInput = document.getElementById('id-input');
-        idInput.value = getFromLocalStorage('id');
+        const idInput = document.getElementById('id-input');
+        idInput.value = getFromLocalStorage(LOCAL_STORAGE.FORM_ID);
         idInput.onchange = () => {
-            setToLocalStorage("id", idInput.value);
+            setToLocalStorage(LOCAL_STORAGE.FORM_ID, idInput.value);
         }
 
-        let uploadButton = document.getElementById('upload-button');
+        const uploadButton = document.getElementById('upload-button');
         uploadButton.onclick = () => {
-            this.uploadFormToServer();
+            this.showLoading(true)
+            this.uploadToServer().then(() => this.showLoading(false));
         }
 
-        let loadButton = document.getElementById('load-button');
+        const loadButton = document.getElementById('load-button');
         loadButton.onclick = () => {
-            this.loadFormFromServer(formTextarea);
+            this.showLoading(true)
+            this.loadFromServer().then(() => this.showLoading(false));
         }
     }
 
-    showLoadingOverlay(show) {
-        document.getElementById('loadingOverlay').style.display = show ? "" : 'none';
+    showLoading(show) {
+        this.loadingOverlay.style.display = show ? '' : 'none';
     }
 
-    async loadFormFromServer(formTextarea) {
-        this.showLoadingOverlay(true);
+    async loadFromServer() {
 
-        const id = getFromLocalStorage('id');
-        const response = await fetch(SERVER_URL + "/get-form", {
-            method: 'GET',
-            headers: {'Content-Type': 'application/json', "id": id},
-        });
-        if (response.ok) {
-            const data = await response.json();
-            formTextarea.value = data[0].json_data;
-            console.log("successfully fetched the form");
-        } else {
-            alert("error in fetching the form");
+        const formId = getFromLocalStorage(LOCAL_STORAGE.FORM_ID);
+        const formVersion = getFromLocalStorage(LOCAL_STORAGE.FORM_VERSION);
+
+        if (!formId) {
+            alert("Form ID is required");
+            return;
         }
 
-        console.log(response);
-        this.showLoadingOverlay(false);
+        const response = await fetch(`${SERVER_URL}/get-form/${formId}/${formVersion}`)
+        console.log(response)
+
+        if (response.status === 304) {
+            console.log("No changes – restore last saved version")
+            this.formTextarea.value =
+                getFromLocalStorage(LOCAL_STORAGE.FORM_SAVED) ?? '';
+            return;
+        }
+
+        if (!response.ok) {
+            console.error(response.statusText);
+            return;
+        }
+
+        const { form, version } = await response.json();
+
+        setToLocalStorage(LOCAL_STORAGE.FORM_DRAFT, form);
+        setToLocalStorage(LOCAL_STORAGE.FORM_SAVED, form);
+        setToLocalStorage(LOCAL_STORAGE.FORM_VERSION, version);
+
+        this.formTextarea.value = form;
+
+        console.log(`Loaded form version ${version}`);
     }
 
-    async uploadFormToServer() {
-        this.showLoadingOverlay(true);
+    async uploadToServer() {
 
-        const id = getFromLocalStorage('id');
-        const json_data = getFromLocalStorage('json_data');
+        const formId = getFromLocalStorage(LOCAL_STORAGE.FORM_ID);
+        const formVersion = getFromLocalStorage(LOCAL_STORAGE.FORM_VERSION);
+        const draftForm = getFromLocalStorage(LOCAL_STORAGE.FORM_DRAFT);
+        const savedForm = getFromLocalStorage(LOCAL_STORAGE.FORM_SAVED);
 
-        const response = await fetch(SERVER_URL + "/upload-form", {
+        if (!formId) {
+            alert("Form ID is required");
+            return;
+        }
+
+        if (savedForm === draftForm) {
+            // if form didn't change
+            console.log("form didn't change - not uploading")
+            return;
+        }
+
+        const response = await fetch(`${SERVER_URL}/upload-form`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({id, json_data})
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: formId,
+                form: draftForm,
+                version: Number(formVersion),
+            })
         });
-        if (response.ok) {
-            console.log("successfully uploaded the form");
-        } else {
-            alert("error in uploading the form");
+        console.log(response)
+
+        if (response.status === 409) {
+            alert("You must load the latest version before uploading");
+            return;
         }
 
-        console.log(response);
-        this.showLoadingOverlay(false);
+        if (!response.ok) {
+            console.error(response.statusText);
+            return;
+        }
+
+        const { version: newVersion } = await response.json();
+
+        setToLocalStorage(LOCAL_STORAGE.FORM_SAVED, draftForm);
+        setToLocalStorage(LOCAL_STORAGE.FORM_VERSION, newVersion);
+        console.log(`Uploaded form version ${newVersion}`);
     }
 }
 
